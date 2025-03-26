@@ -1,0 +1,11 @@
+{
+  "ignores": [
+    "**/.venv/**",
+    "**/site-packages/**",
+    "**/dist/**",
+    "**/build/**",
+    "**/__pycache__/**",
+    "**/*.egg-info/**",
+    "node_modules"
+  ]
+}

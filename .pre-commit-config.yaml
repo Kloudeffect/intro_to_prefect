@@ -1,6 +1,21 @@
+default_stages: [pre-commit]
+
+exclude: |
+  (^\.venv/)|
+  (^venv/)|
+  (^env/)|
+  (^\.mypy_cache/)|
+  (^__pycache__/)|
+  (^\.pytest_cache/)|
+  (^build/)|
+  (^dist/)|
+  (\.egg-info)|
+  (^\.git/)|
+  (site-packages/)
+
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
+    rev: v5.0.0
     hooks:
       - id: check-ast
       - id: check-case-conflict
@@ -8,25 +23,28 @@ repos:
       - id: end-of-file-fixer
       - id: trailing-whitespace
   - repo: https://github.com/psf/black
-    rev: 23.3.0
+    rev: 25.1.0
     hooks:
       - id: black
         args: [ --config=pyproject.toml ]
   - repo: https://github.com/pycqa/isort
-    rev: 5.12.0
+    rev: 6.0.1
     hooks:
       - id: isort
         args: [ --settings-path=pyproject.toml ]
-  - repo: https://github.com/markdownlint/markdownlint
-    rev: v0.12.0
-    hooks:
-      - id: markdownlint
+  -   repo: local
+      hooks:
+        -   id: markdownlint
+            name: markdownlint
+            entry: npx markdownlint-cli2 "**/*.md"
+            language: node
+            types: [markdown]
   - repo: https://github.com/hadolint/hadolint
-    rev: v2.12.0
+    rev: v2.13.1-beta
     hooks:
       - id: hadolint-docker
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.4.0
+    rev: v3.19.1
     hooks:
       - id: pyupgrade
         args: [ --py311-plus ]
